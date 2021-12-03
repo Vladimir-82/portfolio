@@ -1,3 +1,7 @@
+'''
+Телеграмм-бот. Возвращает содержимое превого
+тега параграфа из Википедии по запросу
+'''
 import requests
 import telebot
 from bs4 import BeautifulSoup
