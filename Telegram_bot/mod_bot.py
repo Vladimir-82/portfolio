@@ -1,5 +1,5 @@
 import requests
-import telebot # pip3 install PyTelegramBotAPI
+import telebot
 from bs4 import BeautifulSoup
 
 from token_telegram import _token
@@ -13,17 +13,13 @@ def send_welcome(message):
 
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
-    numbers = [str(_) for _ in range(100)]
     inq = message.text
     responce = requests.get('http://ru.wikipedia.org/wiki' + '/' + str(inq))
-
-
-
     if inq in responce.text:
 
         html_doc = BeautifulSoup(responce.text, features='html.parser')
         title = html_doc.find('h1', {'id': 'firstHeading'})
-        content = html_doc.find('<p>', {'<p>': '</p>'})
+        content = html_doc.find('<p>')
 
         print(title.text)
         print(content.text)
