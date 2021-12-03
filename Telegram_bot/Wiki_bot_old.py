@@ -1,3 +1,5 @@
+"""Телеграмм-бот. Возвращает содержимое превого
+тега параграфа из Википедии по запросу"""
 import requests
 import telebot # pip3 install PyTelegramBotAPI
 from token_telegram import _token
@@ -7,7 +9,6 @@ bot = telebot.TeleBot(_token)
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
     bot.reply_to(message, f'Я старый Wikibot от Вовы. Приятно познакомиться, {message.from_user.first_name}')
-
 
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
