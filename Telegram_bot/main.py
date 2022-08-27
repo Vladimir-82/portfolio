@@ -12,7 +12,9 @@ bot = telebot.TeleBot(_token)
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
-    bot.reply_to(message, f'Я новый Wikibot от Вовы. Приятно познакомиться, {message.from_user.first_name}')
+    bot.reply_to(message, f'Я новый Wikibot от Вовы. Приятно познакомиться, '
+                          f'{message.from_user.first_name}'
+                 )
 
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
