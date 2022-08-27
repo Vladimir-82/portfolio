@@ -1,6 +1,5 @@
 '''
 The snake
-https://python-scripts.com/kivy-android-ios-exe
 '''
 import pygame as pg
 import sys
@@ -170,12 +169,18 @@ for i in range(count_troublse):
 
 FRUITS = ('apple.png', 'banana.jpg', 'pineaplle.jpg')
 fruits = pg.sprite.Group()
-fruit = Fruit((randint(head.image.get_width()//2, W - head.image.get_width()//2)),
-              (randint(head.image.get_width()//2, H - head.image.get_width()//2)), FRUITS[randint(0, 2)], fruits)
+fruit = Fruit((randint(head.image.get_width()//2,
+                       W - head.image.get_width()//2)
+               ),
+              (randint(head.image.get_width()//2,
+                       H - head.image.get_width()//2)
+               ), FRUITS[randint(0, 2)], fruits)
 
 while pg.sprite.spritecollideany(fruit, bushes):
     fruit.kill()
-    fruit = Fruit((randint(0, W)), (randint(0, H)), FRUITS[randint(0, 2)], fruits)
+    fruit = Fruit((randint(0, W)), (randint(0, H)),
+                  FRUITS[randint(0, 2)], fruits
+                  )
 
 mashrooms = pg.sprite.Group()
 
@@ -209,8 +214,12 @@ while True:
     sc_main.blit(score_show, score_place)
     sc_main.blit(title_record, record_place)
 
-    sc_main.blit(info_font.render(str(score), True, pg.Color('red')), (800, 350))
-    sc_main.blit(info_font.render(str(record), True, pg.Color('gold')), (800, 550))
+    sc_main.blit(info_font.render(str(score),
+                                  True, pg.Color('red')), (800, 350)
+                 )
+    sc_main.blit(info_font.render(str(record),
+                                  True, pg.Color('gold')), (800, 550)
+                 )
 
     for i in pg.event.get():
         if i.type == pg.QUIT:
@@ -242,7 +251,7 @@ while True:
             for i in body_list[:-lenght]:
                 i.kill()
 
-        for col in pg.sprite.groupcollide(heads, bushes, False, False).keys():  # snake eats bushes
+        for col in pg.sprite.groupcollide(heads, bushes, False, False).keys():
             print('snake eats bushes')
             set_record(record, score)
             gameover()
@@ -254,14 +263,23 @@ while True:
 
         for col in pg.sprite.groupcollide(mashrooms, bushes, True, False).keys():
             print('mashroom on bushes')
-            mashroom = Mashroom((randint(head.image.get_width() // 2, W - head.image.get_width() // 2)),
-                                (randint(head.image.get_width() // 2, H - head.image.get_width() // 2)), 'mashroom.jpg',
+            mashroom = Mashroom((randint(head.image.get_width() // 2,
+                                         W - head.image.get_width() // 2)
+                                 ),
+                                (randint(head.image.get_width() // 2,
+                                         H - head.image.get_width() // 2)
+                                 ), 'mashroom.jpg',
                                 mashrooms)
 
-        for col in pg.sprite.groupcollide(fruits, mashrooms, True, False).keys():
+        for col in pg.sprite.groupcollide(fruits, mashrooms,
+                                          True, False).keys():
             print('mashroom kills fruit')
-            fruit = Fruit((randint(fruit.image.get_width(), W - fruit.image.get_width())),
-                          (randint(fruit.image.get_width(), H - fruit.image.get_width())), FRUITS[randint(0, 2)], fruits)
+            fruit = Fruit((randint(fruit.image.get_width(),
+                                   W - fruit.image.get_width())
+                           ),
+                          (randint(fruit.image.get_width(),
+                                   H - fruit.image.get_width())
+                           ), FRUITS[randint(0, 2)], fruits)
 
         if pg.sprite.spritecollideany(head, bodes):
             bodes.draw(sc)
@@ -292,21 +310,32 @@ while True:
             elif 2 * head.image.get_width() + 1 <= lenght <= 100 * head.image.get_width():
                 lenght += head.image.get_width()//8
 
-            fruit = Fruit((randint(fruit.image.get_width(), W - fruit.image.get_width())),
-                          (randint(fruit.image.get_width(), H - fruit.image.get_width())), FRUITS[randint(0, 2)],
+            fruit = Fruit((randint(fruit.image.get_width(),
+                                   W - fruit.image.get_width())
+                           ),
+                          (randint(fruit.image.get_width(),
+                                   H - fruit.image.get_width())
+                           ), FRUITS[randint(0, 2)],
                           fruits)
 
             while pg.sprite.spritecollideany(fruit, bushes):
                 fruit.kill()
-                fruit = Fruit((randint(fruit.image.get_width(), W - fruit.image.get_width())),
-                              (randint(fruit.image.get_width(), H - fruit.image.get_width())), FRUITS[randint(0, 2)],
+                fruit = Fruit((randint(fruit.image.get_width(),
+                                       W - fruit.image.get_width())),
+                              (randint(fruit.image.get_width(),
+                                       H - fruit.image.get_width())),
+                              FRUITS[randint(0, 2)],
                               fruits)
 
         if not mashroom:
             dice = randint(1, 400)
             if dice == 1:
-                mashroom = Mashroom((randint(head.image.get_width() // 2, W - head.image.get_width() // 2)),
-                                    (randint(head.image.get_width() // 2, H - head.image.get_width() // 2)), 'mashroom.jpg',
+                mashroom = Mashroom((randint(head.image.get_width() // 2,
+                                             W - head.image.get_width() // 2)
+                                     ),
+                                    (randint(head.image.get_width() // 2,
+                                             H - head.image.get_width() // 2)
+                                     ), 'mashroom.jpg',
                                     mashrooms)
                 raund = 0
         if mashroom:
@@ -314,7 +343,7 @@ while True:
                 mashroom.kill()
                 mashroom = None
 
-        if len(pg.sprite.spritecollide(head, bodes, False)) > 50:  # snake eats itself
+        if len(pg.sprite.spritecollide(head, bodes, False)) > 50:
             print('snake eats itself')
             set_record(record, score)
             gameover()
